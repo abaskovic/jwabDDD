@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-6">
+            <div class="registration-container">
+                <h2 class="mb-4">Registration</h2>
+                <div th:if="${message != null}" class="message success">
+                    [[${message}]]
+                </div>
+
+                <!-- Login button is now below the message -->
+                <a th:if="${message != null}" href="/login" class="btn btn-primary mt-2 mb-4">Login</a>
+
+                <form th:action="@{/register}" method="post" th:object="${user}" role="form">
+
+                    <div class="form-group">
+                        <label for="fullname">Fullname:</label>
+                        <input  th:field="*{fullname}" type="text" class="form-control" id="fullname" name="fullname" required
+                               placeholder="Enter your fullname">
+                        <p th:if="${#fields.hasErrors('fullname')}" th:errorclass="text-danger" th:errors="${user.fullname}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input th:field="*{email}" type="email" class="form-control" id="email" name="email" required
+                               placeholder="Enter your email">
+                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${user.email}"></p>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input th:field="*{password}" type="password" class="form-control" id="password" name="password" required
+                               placeholder="Enter your password">
+                        <p th:if="${#fields.hasErrors('password')}" th:errorclass="text-danger" th:errors="${user.password  }"></p>
+
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-primary">
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

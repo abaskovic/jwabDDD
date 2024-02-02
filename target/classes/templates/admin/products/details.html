@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Details | Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/admin-header :: header"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4 ">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom mt-5">
+                <h1 class="h2">Product Details</h1>
+            </div>
+
+            <form enctype="multipart/form-data" th:object="${product}">
+
+
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input readonly type="text" class="form-control" id="id" th:value="${product.id}">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input readonly type="text" class="form-control" id="name" th:field="*{name}">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input readonly type="text" class="form-control" id="category" th:field="*{category.name}">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea  readonly class="form-control" id="description" th:field="*{description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input readonly type="number" class="form-control" id="price" th:field="*{price}">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="formFile">Image:</label>
+                    <img th:src="@{'/image/' + ${product.imageFileName}}" id="formFile" alt="Product Image" width="110">
+                </div>
+
+                <div class="form-group">
+                    <label for="createdAt">Created at:</label>
+                    <input readonly type="text" class="form-control" id="createdAt"  th:value="${product.createdAt}" >
+                </div>
+
+                <div class="form-group mt-2 row">
+                    <div class="col-12 text-right">
+                        <a class="btn btn-warning " th:href="@{/admin/products/edit(id=${product.id})}">Edit</a>
+                        <a class="btn btn-danger"  th:href="@{/admin/products/delete(id=${product.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                        <a class="btn btn-secondary" th:href="@{/admin/products}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

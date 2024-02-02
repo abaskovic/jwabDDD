@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs | Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/admin-header :: header"></div>
+
+<!-- Page Content -->
+<div class="container-fluid">
+
+    <div class="row">
+
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Logs</h1>
+            </div>
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Time</th>
+                        <th>Address</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="el : ${list}">
+                        <td th:text="${el.id}"></td>
+                        <td th:text="${#dates.format(el.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+                        <td th:text="${el.address}"></td>
+                        <td th:text="${el.user.getEmail()}"></td>
+                        <td th:text="${el.user.getRole()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
