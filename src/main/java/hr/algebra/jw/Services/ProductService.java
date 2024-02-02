@@ -11,5 +11,7 @@ public interface ProductService {
     Product save(ProductDto productDto);
     Product update(ProductDto productDto, long id);
     public List<Category> findAllCategories();
+    public void addEventMessage(String eventMessages);
+    public List<String> getEventMessages();
 
 }

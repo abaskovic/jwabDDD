@@ -39,7 +39,6 @@ public class OrderController {
     @GetMapping("user/orders")
     public String showOrders(Model model) {
         List<Order> orders = orderService.findByLoggedUser();
-        System.out.println(orders);
         model.addAttribute("orders", orders);
         return "user/orders";
     }
@@ -48,7 +47,6 @@ public class OrderController {
     public String showAllOrders(Model model) {
         List<Order> orders = orderRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("orders", orders);
-        System.out.println(orders);
         return "admin/orders/index";
     }
 

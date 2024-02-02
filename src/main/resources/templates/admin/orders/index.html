@@ -48,11 +48,13 @@
                     </div>
                 </div>
             </form>
+            <a href="/admin/orders" class="btn btn-warning w-100 my-3">Clear Filters</a>
 
             <div class="table-responsive">
                 <table class="table table-striped text-center">
                     <thead>
                     <tr>
+                        <th>Order ID</th>
                         <th>Order time</th>
                         <th>Address</th>
                         <th>Postal code</th>
@@ -64,6 +66,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}"></td>
                         <td th:text="${order.orderTime}"></td>
                         <td th:text="${order.address}"></td>
                         <td th:text="${order.postalCode}"></td>

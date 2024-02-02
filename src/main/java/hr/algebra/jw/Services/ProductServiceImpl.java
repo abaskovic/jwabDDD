@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository repository;
 
+    private List<String> eventMessages = new ArrayList<>();
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -43,8 +45,22 @@ public class ProductServiceImpl implements ProductService {
         return repository.save(existingProduct);
     }
 
-    public List<Category> findAllCategories(){
+    public List<Category> findAllCategories() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public void addEventMessage(String eventMessage) {
+        if (eventMessages.size() >= 3) {
+            eventMessages.remove(0);
+        }
+        eventMessages.add(eventMessage);
+    }
+
+    @Override
+    public List<String> getEventMessages() {
+        return new ArrayList<>(eventMessages);
+    }
+
 
 }

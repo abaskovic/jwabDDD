@@ -1,6 +1,7 @@
 package hr.algebra.jw.Model;
 
 import com.fasterxml.jackson.databind.DatabindException;
+import hr.algebra.jw.Listeners.ProductEntityListener;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(ProductEntityListener.class)
 public class Product {
     @Id
     @Column(name = "id", nullable = false)

@@ -34,6 +34,11 @@ public class ProductController {
     @GetMapping("")
     public String showProductList(Model model) {
         List<Product> products = productRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+
+        List<String> eventMessages = productService.getEventMessages();
+        System.out.println(eventMessages);
+        model.addAttribute("eventMessages", eventMessages);
+
         model.addAttribute("products", products);
         return "admin/products/index";
     }

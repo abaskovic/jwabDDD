@@ -25,6 +25,10 @@
                 <h1 class="h2">Products</h1>
             </div>
 
+            <p>Last events:</p>
+            <div th:each="eventMessage : ${eventMessages}">
+                <p th:text="${eventMessage}"></p>
+            </div>
             <a class="btn btn-success btn-sm mt-3 mb-3 col-12  p-3  " href="/admin/products/create">Create new</a>
 
 

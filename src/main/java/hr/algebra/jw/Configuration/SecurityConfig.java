@@ -1,5 +1,6 @@
 package hr.algebra.jw.Configuration;
 
+import hr.algebra.jw.Listeners.ProductEventListener;
 import hr.algebra.jw.Services.CustomSuccessHandler;
 import hr.algebra.jw.Services.CustomUserDetailService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -44,5 +45,10 @@ public class SecurityConfig {
     @Autowired
     public void configure (AuthenticationManagerBuilder auth) throws  Exception{
         auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public ProductEventListener productEventListener() {
+        return new ProductEventListener();
     }
 }
