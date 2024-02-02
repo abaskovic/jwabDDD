@@ -11,7 +11,7 @@
 <body>
 
 <!-- Navbar -->
-<div th:include="fragments/admin-header :: header"></div>
+<div th:include="fragments/admin-header :: .welcome"></div>
 
 <!-- Page Content -->
 <div class="container-fluid">
@@ -47,7 +47,10 @@
                         <td th:text="${product.id}"></td>
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.category.name}"></td>
-                        <td th:text="${product.description}"></td>
+                        <td>
+                            <p th:text="${#strings.length(product.description) > 50 ? #strings.substring(product.description, 0, 50) + '...' : product.description}" class="text-truncate mb-4 mb-md-0" />
+
+                        </td>
                         <td>
                             <img th:src="@{'/image/' + ${product.imageFileName}}" alt="Product Image" width="110">
                         </td>

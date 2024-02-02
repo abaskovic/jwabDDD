@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/shop")
 public class ShopController {
 
     @Autowired

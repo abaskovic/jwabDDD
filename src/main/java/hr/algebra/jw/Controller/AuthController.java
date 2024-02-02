@@ -20,17 +20,17 @@ public class AuthController {
     private UserService userService;
 
     @Autowired
-    UserDetailsService  userDetailsService;
+    UserDetailsService userDetailsService;
 
     @GetMapping("/register")
     public String showRegistrationForm(@ModelAttribute("user") UserDto userDto) {
         return "register";
     }
+
     @PostMapping("register")
-    public String saveUser(@ModelAttribute("user")UserDto userDto, Model model){
+    public String saveUser(@ModelAttribute("user") UserDto userDto, Model model) {
         userDto.setRole("USER");
         userService.save(userDto);
-
         model.addAttribute("message", "REGISTRED SUCCESSFULY");
         return "register";
     }
@@ -39,18 +39,7 @@ public class AuthController {
     public String login() {
         return "login";
     }
-    @GetMapping("/user")
-    public String userPage(Model model, Principal principal) {
-        UserDetails userDetails= userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
-        return "user/index";
-    }
-    @GetMapping("/admin")
-    public String adminPage(Model model, Principal principal) {
-        UserDetails userDetails= userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
-        return "admin/index";
 
-    }
+
 
 }

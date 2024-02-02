@@ -44,13 +44,15 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         logService.save(logDto);
 
         if (roles.orElse("").equals("ADMIN")) {
-            response.sendRedirect("/admin");
+            response.sendRedirect("/admin/orders");
         } else if (roles.orElse("").equals("USER")) {
-            response.sendRedirect("/user");
+            response.sendRedirect("/");
         } else {
             response.sendRedirect("/error");
         }
     }
 
 
+
 }
+

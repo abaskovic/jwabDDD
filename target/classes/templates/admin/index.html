@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{../../css/style.css}">
 </head>
 <body>
-<div th:include="fragments/admin-header :: header"></div>
+<div th:include="fragments/admin-header :: .welcome"></div>
 
 
 <!-- Page Content -->
@@ -18,10 +18,6 @@
 
         <!-- Main Content -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">ADMIN Dashboard</h1>
-                <h2 class="h3">Welcome, [[${user.getFullname()}]]</h2>
-            </div>
 
             <!-- Your dashboard content goes here -->
 
