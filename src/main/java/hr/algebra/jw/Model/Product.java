@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.util.Date;
 
@@ -20,26 +21,24 @@ public class Product {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
     private double price;
-
     @Column(columnDefinition = "TEXT")
     private String description;
     private Date createdAt;
-    private String imageFileName;
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 
-    public Product(String name, Category category, double price, String description, String imageFileName, Date createdAt) {
+
+    public Product(String name, Category category, double price, String description, Date createdAt) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.description = description;
-        this.imageFileName = imageFileName;
         this.createdAt = createdAt;
     }
 }

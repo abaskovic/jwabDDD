@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Images</title>
+</head>
+<body>
+
+<h2>View Images</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="image : ${images}">
+        <td th:text="${image.id}"></td>
+        <td th:text="${image.name}"></td>
+        <td>
+            <img th:src="@{'/download/' + ${image.id}}" alt="Image not found" style="max-width: 100px;">
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

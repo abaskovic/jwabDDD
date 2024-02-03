@@ -17,6 +17,7 @@ public class OrderDto {
     private List<OrderItemDto> orderItems;
     private Long userId;
     private LocalDate orderTime;
+    @NotEmpty(message = "Payment method cannot be empty")
     private String paymentMethod;
     @NotEmpty(message = "Name cannot be empty")
     private String postalCode;
