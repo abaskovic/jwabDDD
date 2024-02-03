@@ -23,7 +23,6 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 public class ImageController {
     @Autowired
     private final ImageService imageService;
-    private final ImageRepository repository;
     @PostMapping("/image")
     public String uploadImage(@RequestParam("image") MultipartFile file, Model model) throws IOException {
         Long fileName = imageService.uploadImage(file);
@@ -41,14 +40,5 @@ public class ImageController {
                 .body(imageData);
     }
 
-    @GetMapping("/view")
-    public String viewImages(Model model) {
-        List<Image> images = repository.findAll();
-        model.addAttribute("images", images);
-        return "images";
-    }
-    @GetMapping("/image")
-    public String show() {
-        return "image";
-    }
+
 }
