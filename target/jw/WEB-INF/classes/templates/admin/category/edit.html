@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Categories | Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/admin-header :: .welcome"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4 ">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
+                <h1 class="h2">Edit Categories</h1>
+            </div>
+
+            <form enctype="multipart/form-data" th:object="${categoryDto}"
+                  method="post">
+
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input readonly type="text" class="form-control" id="id" th:value="${category.id}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"  >
+                    <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                       th:errors="${categoryDto.name}"></p>
+
+                </div>
+                <div class="form-group mt-2 row">
+                    <div class="col-12 text-right">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-secondary" th:href="@{/admin/category}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

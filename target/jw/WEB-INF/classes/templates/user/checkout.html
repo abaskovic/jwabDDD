@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+</head>
+<body>
+<div th:include="fragments/user-header :: header"></div>
+<div class="container mt-4">
+    <h3 class="text-center" th:if="${cart.cartItems.size() == 0}">Your cart is empty.</h3>
+    <div th:if="${!(cart.cartItems.size() == 0)}">
+        <h2>Checkout</h2>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cart.cartItems}">
+                <td th:text="${item.product.name}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.product.price} + ' €'"></td>
+                <td th:text="${item.product.price * item.quantity + ' €'}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="text-right">Total: <span th:text="${total} + ' €'"></span></p>
+
+        <form th:action="@{/user/checkout}" method="post" th:object="${orderDto}" role="form">
+
+            <label for="postalCode">Payment option:</label>
+            <!-- Payment options -->
+            <div class="form-group">
+                <input th:field="*{paymentMethod}" type="radio" id="paypal" name="paymentOption" value="paypal" >
+                <label for="paypal">PayPal</label>
+
+                <input tchecked th:field="*{paymentMethod}" type="radio" id="cash" name="paymentOption" value="cash">
+                <label for="cash">Cash</label>
+
+                <p th:if="${#fields.hasErrors('paymentMethod')}" th:errorclass="text-danger"
+                   th:errors="${orderDto.paymentMethod}"></p>
+            </div>
+            <!-- Address and Order button -->
+            <div class="form-group">
+                <label for="postalCode">Postal Code</label>
+                <input th:field="*{postalCode}" type="text" id="postalCode" name="postalCode" class="form-control">
+                <p th:if="${#fields.hasErrors('postalCode')}" th:errorclass="text-danger"
+                   th:errors="${orderDto.postalCode}"></p>
+
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input th:field="*{address}" type="text" id="address" name="address" class="form-control">
+                <p th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger"
+                   th:errors="${orderDto.address}"></p>
+
+            </div>
+
+            <input type="submit" value="Place Order" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function placeOrder() {
+        alert('Order placed successfully');
+    }
+</script>
+</body>
+</html>

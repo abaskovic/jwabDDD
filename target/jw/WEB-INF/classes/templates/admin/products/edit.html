@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Product | Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/admin-header :: .welcome"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4 ">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
+                <h1 class="h2">Edit Product</h1>
+            </div>
+
+            <form enctype="multipart/form-data" th:object="${productDto}"
+                  method="post">
+
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input readonly type="text" class="form-control" id="id" th:value="${product.id}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"  >
+                    <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                       th:errors="${productDto.name}"></p>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select class="form-control" id="category" th:field="*{categoryId}">
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}"></option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" id="description" th:field="*{description}" ></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="text-danger"
+                       th:errors="${productDto.description}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" id="price" th:field="*{price}" >
+                    <p th:if="${#fields.hasErrors('price')}" th:errorclass="text-danger"
+                       th:errors="${productDto.price}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="formFile">Image:</label>
+                    <img th:src="@{'/showImage/' + ${product.image.id}}" alt="Product Image" width="110">
+                </div>
+
+                <div class="form-group">
+                    <label for="formFile">New image:</label>
+                    <input class="form-control" type="file" id="formFile" th:field="*{imageFile}" >
+                    <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="text-danger"
+                       th:errors="${productDto.imageFile}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="createdAt">Created at:</label>
+                    <input readonly type="text" class="form-control" id="createdAt"  th:value="${product.createdAt}" >
+                </div>
+
+                <div class="form-group mt-2 row">
+                    <div class="col-12 text-right">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-secondary" th:href="@{/admin/products}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

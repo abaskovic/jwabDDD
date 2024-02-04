@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/user-header :: header"></div>
+
+<!-- Page Content -->
+<div class="container-fluid">
+
+    <div class="row">
+
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+            <h1 class="h2">My Orders</h1>
+
+
+            <div class="table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>Order time</th>
+                        <th>Address</th>
+                        <th>Postal code</th>
+                        <th>Payment method</th>
+                        <th>Total price</th>
+                        <th>Products</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderTime}"></td>
+                        <td th:text="${order.address}"></td>
+                        <td th:text="${order.postalCode}"></td>
+                        <td th:text="${order.paymentMethod}"></td>
+                        <td th:text="${order.totalPrice}"></td>
+                        <td>
+                            <table class="table table-striped text-center">
+
+                                <tbody>
+                                <tr th:each="item : ${order.cartItems}">
+                                    <td th:text="${item.product.name}"></td>
+                                    <td th:text="${item.quantity}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

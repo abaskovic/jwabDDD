@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:include="fragments/admin-header :: .welcome"></div>
+
+<!-- Page Content -->
+<div class="container-fluid">
+
+    <div class="row">
+
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Categories</h1>
+            </div>
+
+            <a class="btn btn-success btn-sm mt-3 mb-3 col-12  p-3  " href="/admin/category/create">Create new</a>
+
+
+            <div class="table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="el : ${list}">
+                        <td th:text="${el.id}"></td>
+                        <td th:text="${el.name}"></td>
+                        <td>
+                            <a class="btn btn-info btn-sm" th:href="@{/admin/category/details/{id}(id=${el.id})}">Detail</a>
+                            <a class="btn btn-warning btn-sm" th:href="@{/admin/category/edit/{id}(id=${el.id})}">Edit</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{/admin/category/delete/{id}(id=${el.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
