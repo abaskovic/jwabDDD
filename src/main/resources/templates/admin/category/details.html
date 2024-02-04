@@ -21,7 +21,6 @@
                 <h1 class="h2">Category Details</h1>
             </div>
 
-            <form enctype="multipart/form-data" th:object="${category}">
 
 
                 <div class="form-group">
@@ -32,17 +31,16 @@
 
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input readonly type="text" class="form-control" id="name" th:field="*{name}">
+                    <input readonly type="text" class="form-control" id="name" th:field="${category.name}">
 
                 </div>
 
-                <div class="form-group mt-2 row">
-                    <div class="col-12 text-right">
-                            <a class="btn btn-warning btn-sm" th:href="@{/admin/category/edit/{id}(id=${id})}">Edit</a>
-                            <a class="btn btn-danger btn-sm" th:href="@{/admin/category/delete/{id}(id=${id})}" onclick="return confirm('Are you sure?')">Delete</a>
-                    </div>
-                </div>
-            </form>
+<!--                <div class="form-group mt-2 row">-->
+<!--                    <div class="col-12 text-right">-->
+<!--                            <a class="btn btn-warning btn-sm" th:href="@{/admin/category/edit/{id}(id=${category.id})}">Edit</a>-->
+<!--                            <a class="btn btn-danger btn-sm" th:href="@{/admin/category/delete/{id}(id=${category.id})}" onclick="return confirm('Are you sure?')">Delete</a>-->
+<!--                    </div>-->
+<!--                </div>-->
         </main>
     </div>
 </div>

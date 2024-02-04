@@ -81,6 +81,7 @@ public class CategoryController {
     @GetMapping("/details/{id}")
     public String showProduct(Model model, @PathVariable Long id) {
         try {
+            System.out.println(id);
             Category category = repository.findById(id).get();
             model.addAttribute("category", category);
         } catch (Exception e) {
