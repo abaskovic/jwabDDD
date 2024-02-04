@@ -5,6 +5,7 @@ import hr.algebra.jw.Model.Category;
 import hr.algebra.jw.Repositories.CategoryRepository;
 import hr.algebra.jw.Services.CategoryService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,8 @@ public class CategoryController {
         return "redirect:/admin/category";
     }
 
-    @GetMapping("/edit")
-    public String editProduct(Model model, @RequestParam Long id) {
+    @GetMapping("/edit/{id}")
+    public String editProduct(Model model,@PathVariable Long id) {
         try {
             Category category = repository.findById(id).get();
             CategoryDto categoryDto = new CategoryDto();
@@ -59,8 +60,8 @@ public class CategoryController {
         return "/admin/category/edit";
     }
 
-    @PostMapping("/edit")
-    public String editProduct(Model model, @RequestParam Long id, @Valid @ModelAttribute CategoryDto categoryDto,
+    @PostMapping("/edit/{id}")
+    public String editProduct(Model model, @PathVariable Long id, @Valid @ModelAttribute CategoryDto categoryDto,
                               BindingResult result) {
         try {
             Category category = repository.findById(id).get();
@@ -77,8 +78,8 @@ public class CategoryController {
         return "redirect:/admin/category";
     }
 
-    @GetMapping("/details")
-    public String showProduct(Model model, @RequestParam Long id) {
+    @GetMapping("/details/{id}")
+    public String showProduct(Model model, @PathVariable Long id) {
         try {
             Category category = repository.findById(id).get();
             model.addAttribute("category", category);
@@ -88,8 +89,8 @@ public class CategoryController {
         return "/admin/category/details";
     }
 
-    @GetMapping("/delete")
-    public String deleteProduct(@RequestParam Long id) {
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
         try {
             Category category = repository.findById(id).get();
             repository.delete(category);

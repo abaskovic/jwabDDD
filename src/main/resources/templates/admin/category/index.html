@@ -42,9 +42,9 @@
                         <td th:text="${el.id}"></td>
                         <td th:text="${el.name}"></td>
                         <td>
-                            <a class="btn btn-info btn-sm" th:href="@{/admin/category/details(id=${el.id})}">Detail</a>
-                            <a class="btn btn-warning btn-sm" th:href="@{/admin/category/edit(id=${el.id})}">Edit</a>
-                            <a class="btn btn-danger btn-sm"  th:href="@{/admin/category/delete(id=${el.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                            <a class="btn btn-info btn-sm" th:href="@{/admin/category/details/{id}(id=${el.id})}">Detail</a>
+                            <a class="btn btn-warning btn-sm" th:href="@{/admin/category/edit/{id}(id=${el.id})}">Edit</a>
+                            <a class="btn btn-danger btn-sm" th:href="@{/admin/category/delete/{id}(id=${el.id})}" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>
                     </tr>
                     </tbody>
