@@ -47,18 +47,24 @@ public class CategoryController {
 
     @GetMapping("/edit")
     public String editProduct(Model model, @RequestParam Long id) {
+        Category category = null;
         try {
-            Category category = repository.findById(id).get();
+            category = repository.findById(id).get();
             CategoryDto categoryDto = new CategoryDto();
             categoryDto.setName(category.getName());
             model.addAttribute("category", category);
             model.addAttribute("categoryDto", categoryDto);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR" + id + category.getName() + e.getMessage());
         }
         return "/admin/category/edit";
     }
 
+    @GetMapping("/ante")
+    public String editProduct() {
+
+        return "ante";
+    }
     @PostMapping("/edit")
     public String editProduct(Model model, @RequestParam Long id, @Valid @ModelAttribute CategoryDto categoryDto,
                               BindingResult result) {
