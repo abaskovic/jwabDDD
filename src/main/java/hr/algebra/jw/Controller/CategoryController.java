@@ -4,6 +4,7 @@ import hr.algebra.jw.Dto.CategoryDto;
 import hr.algebra.jw.Model.Category;
 import hr.algebra.jw.Repositories.CategoryRepository;
 import hr.algebra.jw.Services.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -44,27 +45,62 @@ public class CategoryController {
         categoryService.save(categoryDto);
         return "redirect:/admin/category";
     }
-
     @GetMapping("/edit")
     public String editProduct(Model model, @RequestParam Long id) {
-        Category category = null;
         try {
-            category = repository.findById(id).get();
+
+            System.out.println("start"+ id);
+
+            Category category = repository.findById(id).orElseThrow(() -> {
+                return new EntityNotFoundException("Category not found");
+            });
             CategoryDto categoryDto = new CategoryDto();
             categoryDto.setName(category.getName());
             model.addAttribute("category", category);
             model.addAttribute("categoryDto", categoryDto);
+        } catch (EntityNotFoundException e) {
+            // Log the exception
+            System.out.println("Category not found for id: {}"+ id+ e);
+            // You can also rethrow the exception if needed
+            // throw e;
         } catch (Exception e) {
-            System.out.println("ERROR" + id + category.getName() + e.getMessage());
+            // Log other exceptions
+            System.out.println("Error processing request for id: {}"+ id +e);
+            // You can also rethrow the exception if needed
+            // throw e;
         }
         return "/admin/category/edit";
     }
 
-    @GetMapping("/ante")
-    public String editProduct() {
+    @GetMapping("/edit2")
+    public String editProduct2(Model model, @RequestParam Long id) {
+        try {
 
-        return "ante";
+            System.out.println("start"+ id);
+
+            Category category = repository.findById(2L).orElseThrow(() -> {
+                return new EntityNotFoundException("Category not found");
+            });
+            System.out.println(category.getId());
+            CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setName(category.getName());
+            model.addAttribute("category", category);
+            model.addAttribute("categoryDto", categoryDto);
+        } catch (EntityNotFoundException e) {
+            // Log the exception
+            System.out.println("Category not found for id: {}"+ id+ e);
+            // You can also rethrow the exception if needed
+            // throw e;
+        } catch (Exception e) {
+            // Log other exceptions
+            System.out.println("Error processing request for id: {}"+ id +e);
+            // You can also rethrow the exception if needed
+            // throw e;
+        }
+        return "/admin/category/edit2";
     }
+
+
     @PostMapping("/edit")
     public String editProduct(Model model, @RequestParam Long id, @Valid @ModelAttribute CategoryDto categoryDto,
                               BindingResult result) {
