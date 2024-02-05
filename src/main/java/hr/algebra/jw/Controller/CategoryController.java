@@ -130,6 +130,12 @@ public class CategoryController {
         return "/admin/category/details";
     }
 
+    @GetMapping("/details2")
+    public String showProduct() {
+
+        return "/admin/category/details";
+    }
+
     @GetMapping("/delete")
     public String deleteProduct(@RequestParam Long id) {
         try {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>Edit Categories | Admin</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" th:field="{categoryDto.name}"  >
+                    <input type="text" class="form-control" id="name" th:field="${categoryDto.name}"  >
                     <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
                        th:errors="${categoryDto.name}"></p>
 
