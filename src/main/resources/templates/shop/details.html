@@ -37,7 +37,8 @@
                 <div class="row">
                     <!-- Product Image -->
                     <div class="col-md-6">
-                        <img th:src="@{'/image/' + ${product.imageFileName}}" id="productImage" alt="Product Image">
+
+                        <img th:src="@{'/showImage/' + ${product.image.id}}"/>
                     </div>
 
                     <div class="col-md-6" id="productDetails">
@@ -51,7 +52,7 @@
                             <input type="hidden" th:name="productId" th:value="${product.id}"/>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" th:name="quantity" value="1" min="1"/>
+                                    <input type="number" class="form-control " th:name="quantity" value="1" min="1"/>
                                 </div>
                                 <div class="col-sm-6">
                                     <button type="submit" class="btn btn-success w-100">Add to Cart</button>

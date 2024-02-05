@@ -43,6 +43,9 @@
 
                 <input th:field="*{paymentMethod}" type="radio" id="cash" name="paymentOption" value="cash">
                 <label for="cash">Cash</label>
+
+                <p th:if="${#fields.hasErrors('paymentMethod')}" th:errorclass="text-danger"
+                   th:errors="${orderDto.paymentMethod}"></p>
             </div>
             <!-- Address and Order button -->
             <div class="form-group">

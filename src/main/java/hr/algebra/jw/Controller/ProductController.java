@@ -2,6 +2,8 @@ package hr.algebra.jw.Controller;
 
 import hr.algebra.jw.Dto.ProductDto;
 import hr.algebra.jw.Model.Product;
+import hr.algebra.jw.Repositories.ImageRepository;
+import hr.algebra.jw.Services.ImageService;
 import hr.algebra.jw.Services.ProductService;
 import hr.algebra.jw.Repositories.ProductRepository;
 import jakarta.validation.Valid;
@@ -30,6 +32,10 @@ public class ProductController {
     private ProductRepository productRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private ImageRepository ImageRepository;
 
     @GetMapping("")
     public String showProductList(Model model) {
@@ -52,7 +58,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String addProduct(Model model,@Valid @ModelAttribute ProductDto productDto,
+    public String addProduct(Model model, @Valid @ModelAttribute ProductDto productDto,
                              BindingResult result) {
         model.addAttribute("categories", productService.findAllCategories());
 
@@ -67,23 +73,13 @@ public class ProductController {
         MultipartFile image = productDto.getImageFile();
         Date createdAt = new Date();
 
-        String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
-        productDto.setImageFileName(storageFileName);
         productDto.setCreatedAt(createdAt);
 
-        try {
-            String uploadDir = "public/image/";
-            Path uploadPath = Paths.get(uploadDir);
 
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-            try (InputStream inputStream = image.getInputStream()) {
-                Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        var id = imageService.uploadImage(image);
+        productDto.setImage(ImageRepository.findById(id).get());
+
+
         productService.save(productDto);
         return "redirect:/admin/products";
     }
@@ -104,7 +100,7 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "admin/products/edit";
+        return "/admin/products/edit";
     }
 
 
@@ -121,25 +117,13 @@ public class ProductController {
             }
 
             if (!productDto.getImageFile().isEmpty()) {
-                try {
-                    deleteImage(product);
-                    String uploadDir = "public/image/";
+                MultipartFile image = productDto.getImageFile();
+                var imageId = imageService.uploadImage(image);
+                System.out.println(imageId);
+                productDto.setImage(ImageRepository.findById(imageId).get());
+            } else {
 
-
-                    MultipartFile image = productDto.getImageFile();
-                    Date createdAt = new Date();
-
-                    String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
-                    productDto.setImageFileName(storageFileName);
-
-                    try (InputStream inputStream = image.getInputStream()) {
-                        Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }else {
-                productDto.setImageFileName(product.getImageFileName());
+                productDto.setImage(product.getImage());
             }
             productDto.setCreatedAt(product.getCreatedAt());
             productService.update(productDto, product.getId());
@@ -161,7 +145,7 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "admin/products/details";
+        return "/admin/products/details";
     }
 
     @GetMapping("/delete")
@@ -169,7 +153,6 @@ public class ProductController {
         try {
             Product product = productRepository.findById(id).get();
 
-            deleteImage(product);
 
             productRepository.delete(product);
         } catch (Exception e) {
@@ -178,18 +161,5 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    private static void deleteImage(Product product) {
-        String uploadDir = "public/image/";
-        Path oldImagePath = Paths.get(uploadDir + product.getImageFileName());
-
-        try {
-            Files.delete(oldImagePath);
-        } catch (Exception ex) {
-            System.out.println("Ex" + ex.getMessage());
-        }
-    }
-
 
 }
-
-

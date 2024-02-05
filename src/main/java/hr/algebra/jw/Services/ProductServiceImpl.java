@@ -26,7 +26,8 @@ public class ProductServiceImpl implements ProductService {
     public Product save(ProductDto dto) {
         Category category = categoryRepository.findById(dto.getCategoryId()).get();
 
-        Product product = new Product(dto.getName(), category, dto.getPrice(), dto.getDescription(), dto.getImageFileName(), dto.getCreatedAt());
+        Product product = new Product(dto.getName(), category, dto.getPrice(), dto.getDescription(), dto.getCreatedAt());
+        product.setImage(dto.getImage());
         return repository.save(product);
     }
 
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setCategory(category);
         existingProduct.setPrice(dto.getPrice());
         existingProduct.setDescription(dto.getDescription());
-        existingProduct.setImageFileName(dto.getImageFileName());
+        existingProduct.setImage(dto.getImage());
         existingProduct.setCreatedAt(dto.getCreatedAt());
         return repository.save(existingProduct);
     }

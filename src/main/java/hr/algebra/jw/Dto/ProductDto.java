@@ -1,5 +1,6 @@
 package hr.algebra.jw.Dto;
 
+import hr.algebra.jw.Model.Image;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,7 +24,7 @@ public class ProductDto {
     @Size(min = 10, message = "The description should be at least 10 characters")
     @Column(columnDefinition = "TEXT")
     private String description;
-    private String imageFileName;
+    private Image image;
     private Date createdAt;
     private MultipartFile imageFile;
 }

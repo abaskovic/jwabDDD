@@ -56,7 +56,7 @@
 
                         </td>
                         <td>
-                            <img th:src="@{'/image/' + ${product.imageFileName}}" alt="Product Image" width="110">
+                            <img th:src="@{'/showImage/' + ${product.image.id}}" alt="Product Image" width="110">
                         </td>
                         <td>
                             <span th:text="${product.price}"></span>
