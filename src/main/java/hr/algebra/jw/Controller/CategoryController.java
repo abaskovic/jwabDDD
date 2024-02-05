@@ -133,7 +133,7 @@ public class CategoryController {
     @GetMapping("/details2")
     public String showProduct() {
 
-        return "/admin/category/details";
+        return "/admin/category/ante";
     }
 
     @GetMapping("/delete")
