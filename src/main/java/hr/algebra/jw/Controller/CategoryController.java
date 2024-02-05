@@ -40,7 +40,7 @@ public class CategoryController {
     public String addProduct(@Valid @ModelAttribute CategoryDto categoryDto,
                              BindingResult result) {
         if (result.hasErrors()) {
-            return   "/admin/category/create";
+            return   "admin/category/create";
         }
         categoryService.save(categoryDto);
         return "redirect:/admin/category";
@@ -57,7 +57,7 @@ public class CategoryController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/category/edit";
+        return "admin/category/edit";
     }
 
     @PostMapping("/edit/{id}")
@@ -87,7 +87,7 @@ public class CategoryController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/category/details";
+        return "admin/category/details";
     }
 
     @GetMapping("/delete/{id}")

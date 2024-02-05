@@ -55,7 +55,7 @@ public class ShopController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/shop/details";
+        return "shop/details";
     }
 
 
