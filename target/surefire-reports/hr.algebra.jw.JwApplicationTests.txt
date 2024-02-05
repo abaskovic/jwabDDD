@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: hr.algebra.jw.JwApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 90.45 s -- in hr.algebra.jw.JwApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 166.5 s -- in hr.algebra.jw.JwApplicationTests
