@@ -40,7 +40,7 @@ public class CategoryController {
     public String addProduct(@Valid @ModelAttribute CategoryDto categoryDto,
                              BindingResult result) {
         if (result.hasErrors()) {
-            return   "/admin/category/create";
+            return   "admin/category/create";
         }
         categoryService.save(categoryDto);
         return "redirect:/admin/category";
@@ -69,35 +69,7 @@ public class CategoryController {
             // You can also rethrow the exception if needed
             // throw e;
         }
-        return "/admin/category/edit";
-    }
-
-    @GetMapping("/edit2")
-    public String editProduct2(Model model, @RequestParam Long id) {
-        try {
-
-            System.out.println("start"+ id);
-
-            Category category = repository.findById(2L).orElseThrow(() -> {
-                return new EntityNotFoundException("Category not found");
-            });
-            System.out.println(category.getId());
-            CategoryDto categoryDto = new CategoryDto();
-            categoryDto.setName(category.getName());
-            model.addAttribute("category", category);
-            model.addAttribute("categoryDto", categoryDto);
-        } catch (EntityNotFoundException e) {
-            // Log the exception
-            System.out.println("Category not found for id: {}"+ id+ e);
-            // You can also rethrow the exception if needed
-            // throw e;
-        } catch (Exception e) {
-            // Log other exceptions
-            System.out.println("Error processing request for id: {}"+ id +e);
-            // You can also rethrow the exception if needed
-            // throw e;
-        }
-        return "/admin/category/edit2";
+        return "admin/category/edit";
     }
 
 
@@ -127,13 +99,13 @@ public class CategoryController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/category/details";
+        return "admin/category/details";
     }
 
     @GetMapping("/details2")
     public String showProduct() {
 
-        return "/admin/category/ante";
+        return "admin/category/ante";
     }
 
     @GetMapping("/delete")

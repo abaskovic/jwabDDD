@@ -104,7 +104,7 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/products/edit";
+        return "admin/products/edit";
     }
 
 
@@ -161,7 +161,7 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/products/details";
+        return "admin/products/details";
     }
 
     @GetMapping("/delete")
