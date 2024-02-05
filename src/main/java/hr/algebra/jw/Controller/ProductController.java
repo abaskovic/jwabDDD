@@ -86,7 +86,6 @@ public class ProductController {
 
     @GetMapping("/edit")
     public String editProduct(Model model, @RequestParam Long id) {
-
         try {
             model.addAttribute("categories", productService.findAllCategories());
             Product product = productRepository.findById(id).get();
@@ -100,7 +99,7 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/products/edit";
+        return "admin/products/edit";
     }
 
 
@@ -145,15 +144,13 @@ public class ProductController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "/admin/products/details";
+        return "admin/products/details";
     }
 
     @GetMapping("/delete")
     public String deleteProduct(@RequestParam Long id) {
         try {
             Product product = productRepository.findById(id).get();
-
-
             productRepository.delete(product);
         } catch (Exception e) {
             System.out.println(e.getMessage());
